@@ -1,53 +1,65 @@
-# call-bound <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+# ecdsa-sig-formatter
 
-[![github actions][actions-image]][actions-url]
-[![coverage][codecov-image]][codecov-url]
-[![dependency status][deps-svg]][deps-url]
-[![dev dependency status][dev-deps-svg]][dev-deps-url]
-[![License][license-image]][license-url]
-[![Downloads][downloads-image]][downloads-url]
+[![Build Status](https://travis-ci.org/Brightspace/node-ecdsa-sig-formatter.svg?branch=master)](https://travis-ci.org/Brightspace/node-ecdsa-sig-formatter) [![Coverage Status](https://coveralls.io/repos/Brightspace/node-ecdsa-sig-formatter/badge.svg)](https://coveralls.io/r/Brightspace/node-ecdsa-sig-formatter)
 
-[![npm badge][npm-badge-png]][package-url]
+Translate between JOSE and ASN.1/DER encodings for ECDSA signatures
 
-Robust call-bound JavaScript intrinsics, using `call-bind` and `get-intrinsic`.
-
-## Getting started
-
+## Install
 ```sh
-npm install --save call-bound
+npm install ecdsa-sig-formatter --save
 ```
 
-## Usage/Examples
-
+## Usage
 ```js
-const assert = require('assert');
-const callBound = require('call-bound');
+var format = require('ecdsa-sig-formatter');
 
-const slice = callBound('Array.prototype.slice');
+var derSignature = '..'; // asn.1/DER encoded ecdsa signature
 
-delete Function.prototype.call;
-delete Function.prototype.bind;
-delete Array.prototype.slice;
+var joseSignature = format.derToJose(derSignature);
 
-assert.deepEqual(slice([1, 2, 3, 4], 1, -1), [2, 3]);
 ```
 
-## Tests
+### API
 
-Clone the repo, `npm install`, and run `npm test`
+---
 
-[package-url]: https://npmjs.org/package/call-bound
-[npm-version-svg]: https://versionbadg.es/ljharb/call-bound.svg
-[deps-svg]: https://david-dm.org/ljharb/call-bound.svg
-[deps-url]: https://david-dm.org/ljharb/call-bound
-[dev-deps-svg]: https://david-dm.org/ljharb/call-bound/dev-status.svg
-[dev-deps-url]: https://david-dm.org/ljharb/call-bound#info=devDependencies
-[npm-badge-png]: https://nodei.co/npm/call-bound.png?downloads=true&stars=true
-[license-image]: https://img.shields.io/npm/l/call-bound.svg
-[license-url]: LICENSE
-[downloads-image]: https://img.shields.io/npm/dm/call-bound.svg
-[downloads-url]: https://npm-stat.com/charts.html?package=call-bound
-[codecov-image]: https://codecov.io/gh/ljharb/call-bound/branch/main/graphs/badge.svg
-[codecov-url]: https://app.codecov.io/gh/ljharb/call-bound/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/call-bound
-[actions-url]: https://github.com/ljharb/call-bound/actions
+#### `.derToJose(Buffer|String signature, String alg)` -> `String`
+
+Convert the ASN.1/DER encoded signature to a JOSE-style concatenated signature.
+Returns a _base64 url_ encoded `String`.
+
+* If _signature_ is a `String`, it should be _base64_ encoded
+* _alg_ must be one of _ES256_, _ES384_ or _ES512_
+
+---
+
+#### `.joseToDer(Buffer|String signature, String alg)` -> `Buffer`
+
+Convert the JOSE-style concatenated signature to an ASN.1/DER encoded
+signature. Returns a `Buffer`
+
+* If _signature_ is a `String`, it should be _base64 url_ encoded
+* _alg_ must be one of _ES256_, _ES384_ or _ES512_
+
+## Contributing
+
+1. **Fork** the repository. Committing directly against this repository is
+   highly discouraged.
+
+2. Make your modifications in a branch, updating and writing new unit tests
+   as necessary in the `spec` directory.
+
+3. Ensure that all tests pass with `npm test`
+
+4. `rebase` your changes against master. *Do not merge*.
+
+5. Submit a pull request to this repository. Wait for tests to run and someone
+   to chime in.
+
+### Code Style
+
+This repository is configured with [EditorConfig][EditorConfig] and
+[ESLint][ESLint] rules.
+
+[EditorConfig]: http://editorconfig.org/
+[ESLint]: http://eslint.org
