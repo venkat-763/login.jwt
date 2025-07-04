@@ -1,65 +1,46 @@
-# ecdsa-sig-formatter
+# function-bind <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
-[![Build Status](https://travis-ci.org/Brightspace/node-ecdsa-sig-formatter.svg?branch=master)](https://travis-ci.org/Brightspace/node-ecdsa-sig-formatter) [![Coverage Status](https://coveralls.io/repos/Brightspace/node-ecdsa-sig-formatter/badge.svg)](https://coveralls.io/r/Brightspace/node-ecdsa-sig-formatter)
+[![github actions][actions-image]][actions-url]
+<!--[![coverage][codecov-image]][codecov-url]-->
+[![dependency status][deps-svg]][deps-url]
+[![dev dependency status][dev-deps-svg]][dev-deps-url]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
 
-Translate between JOSE and ASN.1/DER encodings for ECDSA signatures
+[![npm badge][npm-badge-png]][package-url]
 
-## Install
-```sh
-npm install ecdsa-sig-formatter --save
-```
+Implementation of function.prototype.bind
 
-## Usage
+Old versions of phantomjs, Internet Explorer < 9, and node < 0.6 don't support `Function.prototype.bind`.
+
+## Example
+
 ```js
-var format = require('ecdsa-sig-formatter');
-
-var derSignature = '..'; // asn.1/DER encoded ecdsa signature
-
-var joseSignature = format.derToJose(derSignature);
-
+Function.prototype.bind = require("function-bind")
 ```
 
-### API
+## Installation
 
----
+`npm install function-bind`
 
-#### `.derToJose(Buffer|String signature, String alg)` -> `String`
+## Contributors
 
-Convert the ASN.1/DER encoded signature to a JOSE-style concatenated signature.
-Returns a _base64 url_ encoded `String`.
+ - Raynos
 
-* If _signature_ is a `String`, it should be _base64_ encoded
-* _alg_ must be one of _ES256_, _ES384_ or _ES512_
+## MIT Licenced
 
----
-
-#### `.joseToDer(Buffer|String signature, String alg)` -> `Buffer`
-
-Convert the JOSE-style concatenated signature to an ASN.1/DER encoded
-signature. Returns a `Buffer`
-
-* If _signature_ is a `String`, it should be _base64 url_ encoded
-* _alg_ must be one of _ES256_, _ES384_ or _ES512_
-
-## Contributing
-
-1. **Fork** the repository. Committing directly against this repository is
-   highly discouraged.
-
-2. Make your modifications in a branch, updating and writing new unit tests
-   as necessary in the `spec` directory.
-
-3. Ensure that all tests pass with `npm test`
-
-4. `rebase` your changes against master. *Do not merge*.
-
-5. Submit a pull request to this repository. Wait for tests to run and someone
-   to chime in.
-
-### Code Style
-
-This repository is configured with [EditorConfig][EditorConfig] and
-[ESLint][ESLint] rules.
-
-[EditorConfig]: http://editorconfig.org/
-[ESLint]: http://eslint.org
+[package-url]: https://npmjs.org/package/function-bind
+[npm-version-svg]: https://versionbadg.es/Raynos/function-bind.svg
+[deps-svg]: https://david-dm.org/Raynos/function-bind.svg
+[deps-url]: https://david-dm.org/Raynos/function-bind
+[dev-deps-svg]: https://david-dm.org/Raynos/function-bind/dev-status.svg
+[dev-deps-url]: https://david-dm.org/Raynos/function-bind#info=devDependencies
+[npm-badge-png]: https://nodei.co/npm/function-bind.png?downloads=true&stars=true
+[license-image]: https://img.shields.io/npm/l/function-bind.svg
+[license-url]: LICENSE
+[downloads-image]: https://img.shields.io/npm/dm/function-bind.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=function-bind
+[codecov-image]: https://codecov.io/gh/Raynos/function-bind/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/Raynos/function-bind/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/Raynos/function-bind
+[actions-url]: https://github.com/Raynos/function-bind/actions
